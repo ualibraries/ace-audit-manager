@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: 'ace-audit-manager:1.11'
+    image: 'uazlibraries/ace-audit-manager:1.11'
     restart: always
     tty: true
     links:
@@ -10,6 +10,7 @@ services:
       - "8080:8080"
     volumes:
       - initdb.d:/opt/initdb.d
+      - /mnt/preservation-dev-workspace:/preservation-dev-workspace
 
   db-host:
     image: 'mysql:5.7'
