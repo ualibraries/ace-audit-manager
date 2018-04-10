@@ -1,0 +1,28 @@
+version: '2'
+services:
+  web:
+    image: 'ace-audit-manager:1.11'
+    restart: always
+    tty: true
+    links:
+      - db-host
+    ports:
+      - "8080:8080"
+    volumes:
+      - initdb.d:/opt/initdb.d
+
+  db-host:
+    image: 'mysql:5.7'
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=insecure
+      - MYSQL_DATABASE=aceamdb
+      - MYSQL_USER=aceam
+      - MYSQL_PASSWORD=ace
+      - MYSQL_ALLOW_EMPTY_PASSWORD='false'
+    volumes:
+      - ./mysql/large-index.cnf:/etc/mysql/mysql.conf.d/large-index.cnf
+      - initdb.d:/docker-entrypoint-initdb.d
+
+volumes:
+  initdb.d:
