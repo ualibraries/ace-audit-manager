@@ -29,13 +29,13 @@ The following environment variables control the docker setup:
 
 ## Deployment
 
-A docker-compose example using mysql is located at [compose/fixity](https://github.com/ualibraries/ace audit manager/tree/master/compose/fixity).
+A docker-compose example using mysql is located at [compose/fixity](https://github.com/ualibraries/ace-audit-manager/tree/master/compose/fixity).
 
 To test out ACE Audit Manager, run the following commands:
 
 ```
 	
-	git clone https://github.com/ualibraries/ace audit manager.git
+	git clone https://github.com/ualibraries/ace-audit-manager.git
 	cd ace-audit-manager/compose/fixity
 	docker-compose up -d
 	sleep 60 # wait for database creation to complete
@@ -52,7 +52,7 @@ To cleanup the above test instance, run:
 
 ```
 	
-	git clone https://github.com/ualibraries/ace audit manager.git
+	git clone https://github.com/ualibraries/ace-audit-manager.git
 	cd ace-audit-manager/compose/fixity
 	docker-compose rm -fsv
 	docker volume prune  # Enter y
