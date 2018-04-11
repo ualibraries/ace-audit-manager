@@ -7,14 +7,14 @@
 
 ## Introduction
 
-[Ace Audit Manager](https://wiki.umiacs.umd.edu/adapt/index.php/Ace:Main) runs [fixity](https://www.dpconline.org/handbook/technical-solutions-and-tools/fixity-and-checksums) checks on archival storage. It is designed to integrate with the [Ace Integrity Management Service](https://wiki.umiacs.umd.edu/adapt/index.php/Ace:Ace_IMS_System)(IMS), which taken together form an ACE [Auditing Control Environment](https://wiki.umiacs.umd.edu/adapt/index.php/Ace)
+[Ace Audit Manager](https://wiki.umiacs.umd.edu/adapt/index.php/Ace:Main) runs [fixity](https://www.dpconline.org/handbook/technical-solutions-and-tools/fixity-and-checksums) checks on archival storage. It is designed to integrate with the [Ace Integrity Management Service](https://wiki.umiacs.umd.edu/adapt/index.php/Ace:Ace_IMS_System)(IMS), which taken together form an ACE [Auditing Control Environment](https://wiki.umiacs.umd.edu/adapt/index.php/Ace). There is usually many deployments of ACE Audit Manager which all connect to the same ACE Integrity Management Service.
 
 ## Dependencies
 ### Host system dependencies
 1. [docker-compose](https://docs.docker.com/compose/overview/) is installed on the system.
 2. The host system's time synchronized with a master [ntp](https://en.wikipedia.org/wiki/Network_Time_Protocol) server.
 3. No other service on the system is listening at port 8080.
-4. Archival storage directories located or mounted under /mnt
+4. Archival storage directories located or mounted under /mnt. This is changeable via the ACE_AUDIT_SHARES environment variable.
 
 ### External dependencies
 
@@ -24,7 +24,7 @@
 
 The following environment variables control the docker setup:
 
-* ACE_AUDIT_SHARES - host directory containing archival content to mount into the docker container so ACE audit manager can audit it. Defaults to /mnt
+* ACE_AUDIT_SHARES - host directory containing archival content to mount into the docker container so ACE audit manager can audit it. Defaults to /mnt.
 * ACE_AUDIT_DBSTORE - host directory where persistant mysql dbstore files should go. Defaults to creating a temporary docker volume
 
 ## Deployment
