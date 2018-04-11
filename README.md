@@ -38,7 +38,7 @@ To test out ACE Audit Manager, run the following commands:
 	git clone https://github.com/ualibraries/ace-audit-manager.git
 	cd ace-audit-manager/compose/fixity
 	docker-compose up -d
-	sleep 60 # wait for database creation to complete
+	sleep 60 # wait one minute for database creation to complete
 	docker-compose stop
 	docker-compose up -d
 	
