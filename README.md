@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Dependencies](#dependencies)
+- [Environment Variables](#environment-variables)
 - [Deployment](#deployment)
 
 ## Introduction
@@ -18,6 +19,13 @@
 ### External dependencies
 
 1. An [smtp](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) server to send emails. For the examples located in the [compose/](https://github.com/ualibraries/archivematica/tree/1.6.1-beta3/compose) directory, they use a gmail test account. For a production deployment an organization's smtp server should be used.
+
+## Environment Variables
+
+The following environment variables control the docker setup:
+
+* ACE_AUDIT_SHARES - host directory containing archival content to mount into ace-am docker container which it should audit. Defaults to /mnt
+* ACE_AUDIT_DBSTORE - host directory where persistant mysql dbstore files should go. Defaults to creating a temporary docker volume
 
 ## Deployment
 
