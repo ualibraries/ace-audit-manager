@@ -1,7 +1,7 @@
 version: '3'
 services:
   audit:
-    image: 'uazlibraries/ace-audit-manager:1.11'
+    image: 'uazlibraries/ace-audit-manager:1.12'
     restart: always
     tty: true
     links:
