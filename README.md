@@ -25,7 +25,7 @@
 The following environment variables control the docker setup:
 
 * ACE_AUDIT_SHARES - host directory containing archival content to mount into the docker container so ACE audit manager can audit it. Defaults to /mnt.
-* ACE_AUDIT_DBSTORE - host directory where persistant mysql dbstore files should go. Defaults to creating a temporary docker volume
+* ACE_AUDIT_DBSTORE - host directory where persistant mysql dbstore files should go. Defaults to creating a temporary docker volume. An example to simply create a persistant directory would be to pass in the value "./dbstore", which would store the mysql dbstore files in the local "dbstore" directory.
 
 ## Deployment
 
