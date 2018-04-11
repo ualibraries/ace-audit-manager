@@ -1,6 +1,6 @@
-version: '2'
+version: '3'
 services:
-  web:
+  audit:
     image: 'uazlibraries/ace-audit-manager:1.11'
     restart: always
     tty: true
@@ -10,7 +10,8 @@ services:
       - "8080:8080"
     volumes:
       - initdb.d:/opt/initdb.d
-      - /mnt/preservation-dev-workspace:/preservation-dev-workspace
+      - ${ACE_AUDIT_SHARES:-/mnt}:/mnt
+      - run.mysql:/run/mysqld
 
   db-host:
     image: 'mysql:5.7'
@@ -24,6 +25,11 @@ services:
     volumes:
       - ./mysql/large-index.cnf:/etc/mysql/mysql.conf.d/large-index.cnf
       - initdb.d:/docker-entrypoint-initdb.d
+      - ${ACE_AUDIT_DBSTORE:-dbstore}:/var/lib/mysql
+      - run.mysql:/run/mysqld
 
 volumes:
   initdb.d:
+  run.mysql:
+  dbstore:
+    

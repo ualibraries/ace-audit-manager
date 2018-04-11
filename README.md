@@ -28,7 +28,7 @@ To test out ACE Audit Manager, run the following commands:
 ```
 	
 	git clone https://github.com/ualibraries/ace audit manager.git
-	cd ace audit manager/compose/fixity
+	cd ace-audit-manager/compose/fixity
 	docker-compose up -d
 	sleep 60 # wait for database creation to complete
 	docker-compose stop
@@ -45,7 +45,7 @@ To cleanup the above test instance, run:
 ```
 	
 	git clone https://github.com/ualibraries/ace audit manager.git
-	cd ace audit manager/compose/fixity
+	cd ace-audit-manager/compose/fixity
 	docker-compose rm -fsv
 	docker volume prune  # Enter y
 	
@@ -53,6 +53,6 @@ To cleanup the above test instance, run:
 
 Two docker containers will be created, validate by running **docker ps -a**
 
-* fixity_web_1 - contains ace audit manager war running under tomcat
+* fixity_audit_1 - contains ace audit manager running under tomcat
 * fixity_db-host_1 - contains mysql database used by ace audit manager.
 
