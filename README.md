@@ -24,12 +24,12 @@
 
 The following environment variables control the docker setup:
 
-* ACE_AUDIT_SHARES - host directory containing archival content to mount into ace-am docker container which it should audit. Defaults to /mnt
+* ACE_AUDIT_SHARES - host directory containing archival content to mount into the docker container so ACE audit manager can audit it. Defaults to /mnt
 * ACE_AUDIT_DBSTORE - host directory where persistant mysql dbstore files should go. Defaults to creating a temporary docker volume
 
 ## Deployment
 
-A docker-compose example using mysql is located at [compose/fixity](https://github.com/ualibraries/ace-audit-manager/tree/master/compose/fixity).
+A [docker-compose](https://github.com/ualibraries/ace-audit-manager/blob/master/compose/fixity/docker-compose.yml) example using mysql is located within the [compose/fixity](https://github.com/ualibraries/ace-audit-manager/tree/master/compose/fixity) subdirectory.
 
 To test out ACE Audit Manager, run the following commands:
 
@@ -46,7 +46,7 @@ To test out ACE Audit Manager, run the following commands:
 
 Then browse to [http://localhost:8080/ace-am](http://localhost:8080/ace-am)
 
-After getting it up and running, follow the [3. Register your first collection](https://wiki.umiacs.umd.edu/adapt/index.php/Ace:Audit_Manager_Installation_Guide) instructions. The docker image mounts /mnt from the host into to docker container, so any shares that have been mounted underneath this will be visible to begin fixity auditing on.
+After getting it up and running, follow the instructions at [3. Register your first collection](https://wiki.umiacs.umd.edu/adapt/index.php/Ace:Audit_Manager_Installation_Guide). The docker image mounts /mnt from the host into to docker container, so any shares that have been mounted underneath this will be visible to begin fixity auditing on.
 
 To cleanup the above test instance, run:
 
