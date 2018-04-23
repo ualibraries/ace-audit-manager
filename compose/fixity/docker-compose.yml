@@ -8,6 +8,12 @@ services:
       - db-host
     ports:
       - "8080:8080"
+    environment:
+      - DB_HOST=${DB_HOST:-db-host}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_DATABASE=${DB_DATABASE:-aceamdb}
+      - DB_USER=${DB_USER:-aceam}
+      - DB_PASSWORD=${DB_PASSWORD:-ace}
     volumes:
       - initdb.d:/opt/initdb.d
       - ${ACE_AUDIT_SHARES:-/mnt}:/mnt
@@ -17,10 +23,10 @@ services:
     image: 'mysql:5.7'
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=insecure
-      - MYSQL_DATABASE=aceamdb
-      - MYSQL_USER=aceam
-      - MYSQL_PASSWORD=ace
+      - MYSQL_ROOT_PASSWORD=${DB_ADMIN_PSWD:-insecure}
+      - MYSQL_DATABASE=${DB_DATABASE:-aceamdb}
+      - MYSQL_USER=${DB_USER:-aceam}
+      - MYSQL_PASSWORD=${DB_PSWD:-ace}
       - MYSQL_ALLOW_EMPTY_PASSWORD='false'
     volumes:
       - ./mysql/large-index.cnf:/etc/mysql/mysql.conf.d/large-index.cnf

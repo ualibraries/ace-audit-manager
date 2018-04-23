@@ -4,7 +4,7 @@ set -x
 NETWORK=${5:-host}
 
 TAG=${4:-1.11}
-CONTAINER=${3:-ace-audit-fixity-test}
+CONTAINER=${3:-ace-audit-fixity}
 REPOSITORY=${2:-ace-audit-manager}
 ACTION=${1:-BUILD}
 DAEMONIZE=-d
