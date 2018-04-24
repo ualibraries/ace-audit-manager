@@ -14,7 +14,6 @@ SED_SMTP_PSWD=${SMTP_PASSWORD:-thisisalongpassword}
 
 cat /opt/$ACE_AUDIT_TAR/ace-am.xml | \
 sed -e "s|localhost/aceam|$SED_DB_HOST:$SED_DB_PORT/$SED_DB_DATABASE|g" \
-    -e "s|aceamdb|$SED_DB_DATABASE|g" \
     -e "s|username=\"aceam\"|username=\"$SED_DB_USER\"|g" \
     -e "s|password=\"ace\"|password=\"$SED_DB_PASSWORD\"|g" \
 > ${CATALINA_HOME}/conf/Catalina/localhost/ace-am.xml
