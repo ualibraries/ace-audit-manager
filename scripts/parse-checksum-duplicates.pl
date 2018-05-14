@@ -6,6 +6,7 @@ use warnings;
 my %fixity = ();
 my $linenum = 0;
 my $duplicates = 0;
+my $duplicate_files = 0;
 my $debug = 0;
 
 binmode(STDOUT, ":utf8");
@@ -45,8 +46,10 @@ foreach my $checksum( keys %fixity ) {
         print( 'DUPLICATES[ '.$num_duplicates.' ] '.$checksum."\n   " );
         print join( "\n   ", @$files )."\n";
         $duplicates++;
+        $duplicate_files += $num_duplicates - 1;
     }
 }
 
-print "\nDUPLICATES_TOTAL: $duplicates\n";
-
+print "\n";
+print "DUPLICATES_FILES: $duplicate_files\n";
+print "DUPLICATES_TOTAL: $duplicates\n";
