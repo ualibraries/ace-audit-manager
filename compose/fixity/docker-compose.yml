@@ -4,38 +4,14 @@ services:
     image: 'uazlibraries/ace-audit-manager:1.11'
     restart: always
     tty: true
-    links:
-      - db-host
     ports:
       - "8080:8080"
     environment:
-      - DB_HOST=${DB_HOST:-db-host}
-      - DB_PORT=${DB_PORT:-3306}
-      - DB_DATABASE=${DB_DATABASE:-aceamdb}
-      - DB_USER=${DB_USER:-aceam}
-      - DB_PASSWORD=${DB_PASSWORD:-ace}
+      - DB_DATABASE=${ACE_AM_DATABASE:-aceamdb}
+      - DB_HOST=${ACE_AMDB_HOST:-db-host}
+      - DB_PORT=${ACE_AMDB_PORT:-3306}
+      - DB_USER=${ACE_AMDBA_USER:-aceam}
+      - DB_PASSWORD=${ACE_AMDBA_PASSWORD:-ace}
+      - BOOTSTRAP_SLEEP=${ACE_AM_BOOTSTRAP_SLEEP:-45}
     volumes:
-      - initdb.d:/opt/initdb.d
       - ${ACE_AUDIT_SHARES:-/mnt}:/mnt
-      - run.mysql:/run/mysqld
-
-  db-host:
-    image: 'mysql:5.7'
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ADMIN_PSWD:-insecure}
-      - MYSQL_DATABASE=${DB_DATABASE:-aceamdb}
-      - MYSQL_USER=${DB_USER:-aceam}
-      - MYSQL_PASSWORD=${DB_PSWD:-ace}
-      - MYSQL_ALLOW_EMPTY_PASSWORD='false'
-    volumes:
-      - ./mysql/large-index.cnf:/etc/mysql/mysql.conf.d/large-index.cnf
-      - initdb.d:/docker-entrypoint-initdb.d
-      - ${ACE_AUDIT_DBSTORE:-dbstore}:/var/lib/mysql
-      - run.mysql:/run/mysqld
-
-volumes:
-  initdb.d:
-  run.mysql:
-  dbstore:
-    
