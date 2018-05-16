@@ -6,7 +6,7 @@ RUN \
 cd /opt && \
 curl -kL https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_JCONNECT_V.tar.gz | tar xz && \
 cp $MYSQL_JCONNECT/$MYSQL_JCONNECT-bin.jar $CATALINA_HOME/lib && \
-curl -kL https://obj.umiacs.umd.edu/ace/releases/$ACE_AUDIT_MANAGER_V/ace-dist-$ACE_AUDIT_MANAGER_V-RELEASE-bin.tar.gz | tar xz && \
+curl -kL https://obj.umiacs.umd.edu/ace/releases/$ACE_V/ace-dist-$ACE_V-RELEASE-bin.tar.gz | tar xz && \
 mkdir -p $CATALINA_HOME/conf/Catalina/localhost && \
 mkdir -p /opt/ace-am && \
 mkdir /opt/initdb.d && \

@@ -5,6 +5,7 @@
 - [Dependencies](#dependencies)
 - [Environment Variables](#environment-variables)
 - [Deployment](#deployment)
+- [Scripts](#scripts)
 
 ## Introduction
 
@@ -53,7 +54,14 @@ The following environment variables control the docker setup:
 
 ## Deployment
 
-A docker-compose example using a mysql docker container is located at [compose/fixity-db](https://github.com/ualibraries/ace-audit-manager/tree/master/compose/fixity-db).
+There are a couple docker-compose deployments provided:
+
+1. [Self contained](#self-contained)
+2. [Singleton](#singleton)
+
+## Self contained
+
+A docker-compose example integrating with a mysql docker container is located at [compose/fixity-db](https://github.com/ualibraries/ace-audit-manager/tree/master/compose/fixity-db). If the public ace-ims service ims.umiacs.umd.edu:8080 is used and an smtp service is available then this docker-compose provides a way to quickly install and try out ace-am.
 
 To test out ACE Audit Manager, run the following commands:
 
@@ -84,4 +92,33 @@ Two docker containers will be created, validate by running **docker ps -a**
 
 * fixitydb_audit_1 - contains ace audit manager running under tomcat
 * fixitydb_db-host_1 - contains a mysql database used by ace audit manager.
+
+## Singleton
+
+The singleton docker-compose example located at [compose/fixity](https://github.com/ualibraries/ace-audit-manager/tree/master/compose/fixity) just installs the ace-am by itself, so it requires an external database and ace-ims to connect to.
+
+This docker-compose example is more likely to be used in a production environment where there is a dedicated database and ace-ims machine that are used by a number of ace-am machines.
+
+## Scripts
+
+Ace Audit manager is quite feature-full, however some scripts have been written to help work with huge 10+ terrabyte archival storages in the [scripts](https://github.com/ualibraries/ace-audit-manager/tree/master/scripts) directory.
+
+### [parse-checksum-duplicates.pl](https://github.com/ualibraries/ace-audit-manager/tree/master/scripts/parse-checksum-duplicates.pl)
+
+Ace-ims can generate a duplicate file report by clicking on a collection, then clicking on the *more...*->*Show Duplicate Files* menuitem. However, this times out for huge archives, so a workaround is to download the checksum list report via *more...*->*Download checkm list* and run the **parse-checksum-duplicates.pl** script on the command line against the checksum list via:
+
+
+```
+	
+	cat Summary.txt | ./parse-checksum-duplicates.pl > duplicates.txt
+	
+```
+
+The duplicate files are organized by their common checksum value. This script requires that perl is installed and in the PATH environment variable list.
+ 
+At the end of the report are two summations:
+
+* DUPLICATES_FILES - contains the total count of files that should get removed so that there are no more duplicates in the collection.
+* DUPLICATES_TOTAL - contains the number of duplicate sets, ie files that all have the same checksum, within the collection.
+
 
