@@ -105,7 +105,7 @@ Ace Audit manager is quite feature-full, however some scripts have been written 
 
 ### [parse-checksum-duplicates.pl](https://github.com/ualibraries/ace-audit-manager/tree/master/scripts/parse-checksum-duplicates.pl)
 
-Ace-ims can generate a duplicate file report by clicking on a collection, then clicking on the *more...*->*Show Duplicate Files* menuitem. However, this times out for huge archives, so a workaround is to download the checksum list report via *more...*->*Download checkm list* and run the **parse-checksum-duplicates.pl** script on the command line against the checksum list via:
+Ace-ims can generate a duplicate file report by clicking on a collection, then clicking on the *more...*->*Show Duplicate Files* menu item. However, this times out for huge archives, so a workaround is to download the checksum list report via *more...*->*Download checkm list* and on the command line run the **parse-checksum-duplicates.pl** script against the checksum list via:
 
 
 ```
