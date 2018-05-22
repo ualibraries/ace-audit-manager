@@ -17,4 +17,4 @@ COPY docker/* /opt/ace-am/
 
 VOLUME ["/opt/initdb.d"]
 
-CMD [ -f "$CATALINA_HOME/webapps/ace-am.war" ] && catalina.sh run || ( /opt/ace-am/setup.sh && catalina.sh run )
+CMD [ -d "$CATALINA_HOME/webapps/ace-am" ] && catalina.sh run || ( /opt/ace-am/setup.sh && catalina.sh run)

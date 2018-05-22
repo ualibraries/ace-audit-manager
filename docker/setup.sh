@@ -22,4 +22,8 @@ if [ "xx${BOOTSTRAP_SLEEP}" != "xx" ]; then
   sleep $BOOTSTRAP_SLEEP
 fi
 
-cp /opt/$ACE_AUDIT_TAR/ace-am.war "$CATALINA_HOME/webapps/ace-am.war"
+mkdir -p "$CATALINA_HOME/webapps/ace-am"
+cd "$CATALINA_HOME/webapps/ace-am"
+unzip /opt/$ACE_AUDIT_TAR/ace-am.war
+
+/opt/ace-am/bootstrap.sh &
