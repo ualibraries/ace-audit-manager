@@ -6,4 +6,4 @@ DEBUG="--dry-run"
 
 rsync $DEBUG -a --ignore-existing --max-delete=-1 --progress $SRC/ $SERVER:$DST
 
-# If local machine copy, just use cp -an (ie cp -a --no-clobber)
+# If local machine copy, just use cp -van $SRC/* $DST/ (ie cp -va --no-clobber $SRC/* $DST)
