@@ -1,18 +1,18 @@
-FROM tomcat:8.5-jre8
+FROM tomcat:8.5.51-jdk8
 
 ENV ACE_V=1.14.1
-ENV ACE_AUDIT_TAR=ace-am-1.14.1-RELEASE MYSQL_JCONNECT_V=5.1.47 MYSQL_JCONNECT=mysql-connector-java-5.1.47
+ENV ACE_AUDIT_TAR=ace-am-1.14.1-RELEASE MYSQL_JCONNECT_V=5.1.48 MYSQL_JCONNECT=mysql-connector-java-5.1.48
 
 RUN \
-cd /opt && \
-curl -kL https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_JCONNECT_V.tar.gz | tar xz && \
-cp $MYSQL_JCONNECT/$MYSQL_JCONNECT-bin.jar $CATALINA_HOME/lib && \
-curl -kL https://obj.umiacs.umd.edu/ace/releases/$ACE_V/ace-dist-$ACE_V-RELEASE-bin.tar.gz | tar xz && \
-mkdir -p $CATALINA_HOME/conf/Catalina/localhost && \
-mkdir -p /opt/ace-am && \
-mkdir /opt/initdb.d && \
-cp $ACE_AUDIT_TAR/ace-am.sql /opt/initdb.d && \
-sed -i -e "s|MyISAM|InnoDB|g" /opt/initdb.d/ace-am.sql
+    cd /opt && \
+    curl -kL https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_JCONNECT_V.tar.gz | tar xz && \
+    cp $MYSQL_JCONNECT/$MYSQL_JCONNECT-bin.jar $CATALINA_HOME/lib && \
+    curl -kL https://obj.umiacs.umd.edu/ace/releases/$ACE_V/ace-dist-$ACE_V-RELEASE-bin.tar.gz | tar xz && \
+    mkdir -p $CATALINA_HOME/conf/Catalina/localhost && \
+    mkdir -p /opt/ace-am && \
+    mkdir /opt/initdb.d && \
+    cp $ACE_AUDIT_TAR/ace-am.sql /opt/initdb.d && \
+    sed -i -e "s|MyISAM|InnoDB|g" /opt/initdb.d/ace-am.sql
 
 COPY docker/* /opt/ace-am/
 
