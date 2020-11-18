@@ -1,18 +1,18 @@
 # ACE Audit Manager docker
 
-- [ACE Audit Manager docker](#ACE-Audit-Manager-docker)
-	- [Introduction](#Introduction)
-	- [Background](#Background)
-	- [Dependencies](#Dependencies)
-		- [Host system dependencies](#Host-system-dependencies)
-		- [External dependencies](#External-dependencies)
-	- [Environment Variables](#Environment-Variables)
-	- [Deployment](#Deployment)
-	- [Self contained](#Self-contained)
-	- [Singleton](#Singleton)
-	- [Scripts](#Scripts)
+- [ACE Audit Manager docker](#ace-audit-manager-docker)
+	- [Introduction](#introduction)
+	- [Background](#background)
+	- [Dependencies](#dependencies)
+		- [Host system dependencies](#host-system-dependencies)
+		- [External dependencies](#external-dependencies)
+	- [Environment Variables](#environment-variables)
+	- [Deployment](#deployment)
+	- [Self contained](#self-contained)
+	- [Singleton](#singleton)
+	- [Scripts](#scripts)
 		- [parse-checksum-duplicates.pl](#parse-checksum-duplicatespl)
-	- [Known Issues](#Known-Issues)
+	- [Known Issues](#known-issues)
 
 ## Introduction
 
@@ -32,10 +32,12 @@ There is usually many deployments of ACE Audit Manager which all connect to the 
 
 This docker image was created via the [manual instructions](https://wiki.umiacs.umd.edu/adapt/index.php/Ace:Audit_Manager_Installation_Guide) for setting up the ACE audit manager. The [source code](https://gitlab.umiacs.umd.edu/adapt/ace) for the entire ACE suite is hosted on [gitlab](https://gitlab.umiacs.umd.edu/groups/adapt)
 
-A good [comparison chart](http://digitalpowrr.niu.edu/digital-preservation-101/tool-grid/) between different archiveval storage systems is provided by digitalpowrr.
+A good [comparison chart](http://digitalpowrr.niu.edu/digital-preservation-101/tool-grid/) between different archival storage systems is provided by digitalpowrr.
 
 ## Dependencies
+
 ### Host system dependencies
+
 1. [docker-compose](https://docs.docker.com/compose/overview/) is installed on the system.
 2. The host system's time synchronized with a master [ntp](https://en.wikipedia.org/wiki/Network_Time_Protocol) server.
 3. No other service on the system is listening at port 8080.
@@ -73,11 +75,11 @@ A docker-compose example integrating with a mysql docker container is located at
 To test out ACE Audit Manager, run the following commands:
 
 ```
-	
-	git clone https://github.com/ualibraries/ace-audit-manager.git
-	cd ace-audit-manager/compose/fixity-db
-	docker-compose up -d
-	
+
+ git clone https://github.com/ualibraries/ace-audit-manager.git
+ cd ace-audit-manager/compose/fixity-db
+ docker-compose up -d
+
 ```
 
 Then browse to [http://localhost:8080/ace-am](http://localhost:8080/ace-am)
@@ -87,12 +89,12 @@ After getting it up and running, follow the [3. Register your first collection](
 To cleanup the above test instance, run:
 
 ```
-	
-	git clone https://github.com/ualibraries/ace-audit-manager.git
-	cd ace-audit-manager/compose/fixity
-	docker-compose rm -fsv
-	docker volume prune  # Enter y
-	
+
+ git clone https://github.com/ualibraries/ace-audit-manager.git
+ cd ace-audit-manager/compose/fixity
+ docker-compose rm -fsv
+ docker volume prune  # Enter y
+
 ```
 
 Two docker containers will be created, validate by running **docker ps -a**
@@ -114,26 +116,26 @@ Ace Audit manager is quite feature-full, however some scripts have been written 
 
 Ace-ims can generate a duplicate file report by clicking on a collection, then clicking on the *more...*->*Show Duplicate Files* menu item. However, this times out for huge archives, so a workaround is to download the checksum list report via *more...*->*Download checkm list* and on the command line run the **parse-checksum-duplicates.pl** script against the checksum list via:
 
-
 ```
-	
-	cat Summary.txt | ./parse-checksum-duplicates.pl > duplicates.txt
-	
+
+ cat Summary.txt | ./parse-checksum-duplicates.pl > duplicates.txt
+
 ```
 
 The duplicate files are organized by their common checksum value. This script requires that perl is installed and in the PATH environment variable list.
- 
+
 At the end of the report are two summations:
 
 * DUPLICATES_FILES - contains the total count of files that should get removed so that there are no more duplicates in the collection.
 * DUPLICATES_TOTAL - contains the number of duplicate sets, ie files that all have the same checksum, within the collection.
 
 ## Known Issues
+
 Currently it is known that ACE has performance issues in regards to finding missing files during peer comparison. If a large number of files in a collection are deleted on one ACE server and not the other and an audit is run on that collection from the server that has all the files with a peer comparison happening on the server with the missing files, it will process around 3 files per minute rendering the audit unable to complete in a reasonable time frame and therefore useless in such a case. Current requirements for digital preservation need audit's to be run every 90 days.
 
 Two ways to bypass this are:
+
 1. Make sure when files are deleted from one ACE server they are deleted from both, which would be the proper way to meet digital preservation requirements.
 2. Not have peer comparison happen, which leads to audits showing no errors on the ACE server with the files deleted.
-   
-Option 1 is the prefered methdod at this time
 
+Option 1 is the preferred method at this time
